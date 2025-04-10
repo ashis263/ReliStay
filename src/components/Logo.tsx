@@ -9,7 +9,7 @@ const Logo: React.FC<{ className?: string; variant: "white" | "black" }> = ({
 }) => {
   return (
     <Link href="/" className={clsx(className, " flex items-center")}>
-      <h1 className="text-3xl font-extrabold font-mono text-black flex items-center gap-2"><Home className="text-primary" /> ReliStay</h1>
+      <h1 className="text-2xl sm:text-3xl font-extrabold font-mono text-black flex items-center gap-2"><Home className="text-primary" /> ReliStay</h1>
       {/* <Image
         src={variant === "white" ? "/assets/brand2.png" : "/assets/brand1.png"}
         alt="brand logo"
