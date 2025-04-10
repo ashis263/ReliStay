@@ -38,9 +38,9 @@ const Navbar = () => {
   }
 
   return (
-    <div className="h-16">
+    <div className="h-20">
       <nav
-        className={`w-full fixed top-0 z-50 py-4 flex transition-all duration-300 ease-in-out ${
+        className={`w-full fixed top-0 z-50 py-6 flex transition-all duration-300 ease-in-out ${
           fixed ? "!bg-white shadow-[0_2px_10px_rgb(0_0_0_/_0.15)]" : ""
         }`}
       >
