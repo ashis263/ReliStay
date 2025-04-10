@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { NavDropdown } from "./components/NavDropdown";
 
 const Navbar = () => {
   const path = usePathname();
@@ -37,7 +38,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className="h-16 lg:h-20">
+    <div className="h-16">
       <nav
         className={`w-full fixed top-0 z-50 py-4 flex transition-all duration-300 ease-in-out ${
           fixed ? "!bg-white shadow-[0_2px_10px_rgb(0_0_0_/_0.15)]" : ""
@@ -50,7 +51,9 @@ const Navbar = () => {
               {navigation.map((navItem) => (
                 <li
                   key={navItem.id}
-                  className="hover:text-primary transition-all duration-150  text-sm font-medium"
+                  className={`hover:text-primary transition-all duration-150  text-sm font-medium ${
+                    path === navItem.path ? "text-primary" : ""
+                  }`}
                 >
                   <Link href={navItem.path}>
                     <p>{navItem.label}</p>
@@ -67,14 +70,17 @@ const Navbar = () => {
               <div>
                 <Link href={"register"}>
                   <Button variant="link" className="cursor-pointer text-back">
-                    Create
+                    Register
                   </Button>
                 </Link>
                 <Link href={"/login"}>
-                  <Button>Login</Button>
+                  <Button className="max-md:!h-7 rounded">Login</Button>
                 </Link>
               </div>
             )}
+          </div>
+          <div className="md:hidden ml-2">
+            <NavDropdown />
           </div>
         </Container>
       </nav>

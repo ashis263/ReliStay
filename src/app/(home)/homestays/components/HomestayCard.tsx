@@ -77,7 +77,7 @@ const HomestayCard: React.FC<{ homestay: Homestay }> = ({ homestay }) => {
                 <Bath className="text-primary w-4" />
                 Amenities:
               </p>
-              <div className="flex gap-10 sm:gap-2 flex-wrap max-sm:justify-between my-1">
+              <div className="flex gap-2 sm:gap-2 flex-wrap max-sm:justify-between my-1">
                 {amenities.map((item, index) => (
                   <span key={index} className="text-xs text-primary">
                     {/* < */}
