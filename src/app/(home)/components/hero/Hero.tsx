@@ -1,47 +1,21 @@
-import Container from "@/components/container";
-import { Select } from "@/components/select";
-import Image from "next/image";
+import Search from "./components/Search";
 
 const Hero = () => {
   return (
-    <Container>
-      <div className="h-[480px] rounded-sm relative">
-        <Image
-          src={"/assets/hero-image.jpg"}
-          alt="hero image"
-          width={500}
-          height={300}
-          className="absolute top-0 left-0 w-full h-full object-cover rounded-md "
-        />
-        <div className="absolute top-0 left-0 w-full h-full bg-black/20" />
-
-        <div className="bg-white rounded-sm p-4 absolute z-20  lg:w-8/12 w-11/12 left-1/2 -bottom-24 shadow  -translate-x-1/2 ">
-          <Select />
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum
-          exercitationem, cum, in, modi explicabo quas nesciunt laudantium
-          soluta nostrum doloribus voluptates impedit? Sequi alias expedita quis
-          dolor aliquid, corrupti non.
-        </div>
+    <div className="relative">
+      <div className="bg-[url('/assets/hero-image.jpg')] opacity-70 bg-cover bg-no-repeat h-[70vh] lg:h-[82vh]"></div>
+      <div className="w-4/5 sm:w-2/3 mx-auto absolute  top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+        <h1 className="text-4xl lg:text-5xl text-primary font-bold mb-4">
+          Discover Reliable Homestays Across Bangladesh
+        </h1>
+        <p className="lg:text-lg sm:text-muted-foreground mb-6">
+          ReliStay connects travelers with trusted local hosts in every corner
+          of Bangladesh from bustling cities to peaceful villages. Book your
+          perfect stay and experience local life like never before.
+        </p>
+        <Search />
       </div>
-      <div>
-        <video
-          id="my-video"
-          className="video-js"
-          autoPlay
-          controls
-          preload="auto"
-          width="640"
-          height="264"
-          poster="MY_VIDEO_POSTER.jpg"
-          data-setup="{}"
-        >
-          <source
-            src="https://videocdn.cdnpk.net/videos/5b68b560-422a-4fd1-871b-1bcddf2af118/horizontal/previews/clear/large.mp4?token=exp=1743617406~hmac=0d6f342bdfaaae75f6561849102eea00d82065829d831e810437b2dbdb26c0cb"
-            type="video/mp4"
-          ></source>
-        </video>
-      </div>
-    </Container>
+    </div>
   );
 };
 
