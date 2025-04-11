@@ -88,8 +88,6 @@ const SearchProvider = ({ children }: { children: ReactNode }) => {
     setQueryString,
   };
 
-  console.log(queryString);
-
   return (
     <SearchContext.Provider value={searchData}>
       {children}
