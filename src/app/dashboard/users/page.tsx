@@ -15,18 +15,20 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-const data = [
-  {
-    id: 2,
-    name: "Mr Rahim",
-    email: "rahim@gmail.com",
-    role: "customer",
-    location: "Dhaka Bangladesh",
-    gender: "male",
-  },
-];
+import { headers } from "next/headers";
 
-const Users = () => {
+const Users = async () => {
+  const getUsers = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/users`,
+    {
+      headers: new Headers(await headers()),
+    }
+  );
+  const users = await getUsers.json();
+  console.log(users.data);
+
+  if (!users.data.length) return;
+
   return (
     <Table>
       <TableHead>
@@ -39,11 +41,11 @@ const Users = () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map((row) => (
-          <TableRow key={row.id} className="border-b-2">
+        {users.data?.map((row) => (
+          <TableRow key={row._id} className="border-b-2">
             <Td> {row.name} </Td>
             <Td> {row.email} </Td>
-            <Td> {row.gender} </Td>
+            <Td> {row?.address || "New York"} </Td>
             <Td className=" md:w-28">
               <DropDown role={row.role} />
             </Td>
@@ -54,6 +56,7 @@ const Users = () => {
                     <Edit />
                   </Button>
                 }
+                email={row.email}
                 confirmButton="Update"
               >
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -70,6 +73,7 @@ const Users = () => {
                   </Button>
                 }
                 confirmButton="Delete"
+                email={row.email}
               >
                 <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                 <AlertDialogDescription>

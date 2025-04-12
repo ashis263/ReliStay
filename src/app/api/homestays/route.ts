@@ -42,6 +42,8 @@ const GET = async () => {
   await dbConnect();
   const result = await HomestayModel.find();
 
+  // console.log(result);
+
   return NextResponse.json(result);
 };
 
