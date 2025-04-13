@@ -3,7 +3,7 @@ import { Home } from "lucide-react";
 import Link from "next/link";
 // import Image from "next/image";
 
-const Logo: React.FC<{ className?: string; variant: "white" | "black" }> = ({
+const Logo: React.FC<{ className?: string; variant?: "white" | "black" }> = ({
   className,
   // variant,
 }) => {
