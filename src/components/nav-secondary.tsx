@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { LucideIcon } from "lucide-react";
 
 import {
   SidebarGroup,
@@ -10,6 +9,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+import { Icon, IconProps } from "@tabler/icons-react";
 
 export function NavSecondary({
   items,
@@ -18,7 +19,7 @@ export function NavSecondary({
   items: {
     title: string;
     url: string;
-    icon: LucideIcon;
+    icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
   }[];
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
   return (

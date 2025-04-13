@@ -1,6 +1,6 @@
 "use client";
 
-import { MailIcon, PlusCircleIcon, type LucideIcon } from "lucide-react";
+import { MailIcon, PlusCircleIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +11,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+import { Icon, IconProps } from "@tabler/icons-react";
 
 export function NavMain({
   items,
@@ -18,7 +20,7 @@ export function NavMain({
   items: {
     title: string;
     url: string;
-    icon?: LucideIcon;
+    icon?: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
   }[];
 }) {
   return (

@@ -3,14 +3,6 @@ import { NextAuthOptions } from "next-auth";
 import User from "@/app/models/user";
 import bcrypt from "bcrypt";
 
-interface User {
-  id: number;
-  name?: string;
-  email: string;
-  password?: string;
-  role: string;
-}
-
 const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
@@ -19,20 +11,26 @@ const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email", placeholder: "Enter Email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials: User) {
+      async authorize(credentials) {
+        if (!credentials) return null;
+
         const { email, password } = credentials;
 
         const user = await User.findOne({ email });
 
-        if (!user) return;
+        if (!user || !user.password) return null;
 
         const isPasswordOk = await bcrypt.compare(password, user.password);
 
-        console.log(user);
-
         if (isPasswordOk) {
-          return user;
+          return {
+            id: user._id.toString(),
+            name: user.name,
+            email: user.email,
+            role: user.role,
+          };
         }
+
         return null;
       },
     }),

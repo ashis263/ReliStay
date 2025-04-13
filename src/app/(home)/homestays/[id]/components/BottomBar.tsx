@@ -1,6 +1,6 @@
 import Container from "@/components/container";
 import { Button } from "@/components/ui/button";
-import { DatePickerDemo } from "./DayPicker";
+// import { DatePickerDemo } from "./DayPicker";
 import { SelectDemo } from "./SelectGuest";
 
 const BottomBar: React.FC<{ pricePerNight: number, maxGuests: number }> = ({ pricePerNight, maxGuests }) => {
@@ -19,8 +19,8 @@ const BottomBar: React.FC<{ pricePerNight: number, maxGuests: number }> = ({ pri
           </div>
           <form className="hidden sm:block">
             <div className="space-y-2 lg:space-y-4">
-              <DatePickerDemo placeholder="Check-in" />
-              <DatePickerDemo placeholder="Checkout" />
+              {/* <DatePickerDemo placeholder="Check-in" />
+              <DatePickerDemo placeholder="Checkout" /> */}
               <SelectDemo maxGuests={maxGuests}  />
             </div>
           </form>

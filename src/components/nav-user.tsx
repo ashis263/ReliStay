@@ -35,7 +35,7 @@ interface User {
 }
 
 export function NavUser() {
-  const [user, setUser] = useState<User | null>({
+  const [user, setUser] = useState<User>({
     name: "John Doe",
     email: "john@doe.com",
     role: "homeowner",
@@ -46,7 +46,7 @@ export function NavUser() {
   const { isMobile } = useSidebar();
 
   useEffect(() => {
-    if (session) {
+    if (session && session.user) {
       console.log(`http://localhost:3000/api/users/${session.user.email}`);
 
       fetch(`http://localhost:3000/api/users/${session.user.email}`)

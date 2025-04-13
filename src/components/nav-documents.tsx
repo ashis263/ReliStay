@@ -4,7 +4,6 @@ import {
   FolderIcon,
   MoreHorizontalIcon,
   ShareIcon,
-  type LucideIcon,
 } from "lucide-react";
 
 import {
@@ -22,6 +21,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { ForwardRefExoticComponent, RefAttributes } from "react";
+import { Icon, IconProps } from "@tabler/icons-react";
 
 export function NavDocuments({
   items,
@@ -29,7 +30,7 @@ export function NavDocuments({
   items: {
     name: string;
     url: string;
-    icon: LucideIcon;
+    icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
   }[];
 }) {
   const { isMobile } = useSidebar();
