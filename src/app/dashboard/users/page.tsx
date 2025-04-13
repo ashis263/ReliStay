@@ -7,19 +7,28 @@ import {
   Td,
   Th,
 } from "@/components/table";
+import DropDown from "./components/drop-down";
+import { Button } from "@/components/ui/button";
+import { Edit, Trash } from "lucide-react";
+import ModalBox from "./components/modal-box";
+import {
+  AlertDialogDescription,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { headers } from "next/headers";
 
-const data = [
-  {
-    id: 2,
-    name: "Mr Rahim",
-    email: "rahim@gmail.com",
-    role: "customer",
-    location: "Dhaka Bangladesh",
-    gender: "male",
-  },
-];
+const Users = async () => {
+  const getUsers = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/users`,
+    {
+      headers: new Headers(await headers()),
+    }
+  );
+  const users = await getUsers.json();
+  console.log(users.data);
 
-const Users = () => {
+  if (!users.data.length) return;
+
   return (
     <Table>
       <TableHead>
@@ -27,18 +36,52 @@ const Users = () => {
           <Th>Name</Th>
           <Th>Email</Th>
           <Th>Address</Th>
-          <Th>Name</Th>
-          <Th>Name</Th>
+          <Th>Role</Th>
+          <Th className="text-right">Actions</Th>
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.map((row) => (
-          <TableRow key={row.id}>
+        {users.data?.map((row) => (
+          <TableRow key={row._id} className="border-b-2">
             <Td> {row.name} </Td>
             <Td> {row.email} </Td>
-            <Td> {row.gender} </Td>
-            <Td> {row.role} </Td>
-            <Td> {row.name} </Td>
+            <Td> {row?.address || "New York"} </Td>
+            <Td className=" md:w-28">
+              <DropDown role={row.role} />
+            </Td>
+            <Td className="flex justify-end">
+              <ModalBox
+                openButton={
+                  <Button variant="ghost">
+                    <Edit />
+                  </Button>
+                }
+                email={row.email}
+                confirmButton="Update"
+              >
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete the
+                  user and remove the user data from our servers.
+                </AlertDialogDescription>
+              </ModalBox>
+
+              <ModalBox
+                openButton={
+                  <Button variant="ghost">
+                    <Trash />
+                  </Button>
+                }
+                confirmButton="Delete"
+                email={row.email}
+              >
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete the
+                  user and remove the user data from our servers.
+                </AlertDialogDescription>
+              </ModalBox>
+            </Td>
           </TableRow>
         ))}
       </TableBody>

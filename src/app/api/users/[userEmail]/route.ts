@@ -1,5 +1,6 @@
 import User from "@/app/models/user";
 import dbConnect from "@/lib/dbConnect";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 const GET = async (
@@ -14,4 +15,20 @@ const GET = async (
   return NextResponse.json(user);
 };
 
-export { GET };
+const DELETE = async (
+  req: Request,
+  { params }: { params: Promise<{ userEmail: string }> }
+) => {
+  const { userEmail } = await params;
+
+  await dbConnect();
+  const user = await User.deleteOne({ email: userEmail });
+
+  if (user.deletedCount) {
+    revalidatePath("/dashboard/users");
+  }
+
+  return NextResponse.json(user);
+};
+
+export { GET, DELETE };

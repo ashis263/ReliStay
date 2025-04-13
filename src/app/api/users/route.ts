@@ -3,7 +3,8 @@ import dbConnect from "@/lib/dbConnect";
 import bcrypt from "bcrypt";
 
 const GET = async () => {
-  const data = await User.find();
+  await dbConnect();
+  const data = await User.find({}, "_id name email role");
 
   return Response.json({ data });
 };
