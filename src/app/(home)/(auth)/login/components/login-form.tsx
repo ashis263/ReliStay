@@ -13,26 +13,25 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Link from "next/link"
 import { FormEvent } from "react"
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { useRouter } from "next/navigation";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  const session = useSession();
   const router = useRouter()
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
-    await signIn('credentials', {
+    const res = await signIn('credentials', {
       email,
       password,
       redirect: false
     });
-    if (session.data) {
+    if (res?.ok) {
       router.push('/')
     }
   }

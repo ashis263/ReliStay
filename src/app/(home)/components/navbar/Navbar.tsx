@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { usePathname } from "next/navigation";
 import Container from "@/components/container";
 import Logo from "@/components/Logo";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
@@ -16,6 +16,9 @@ const Navbar = () => {
   const path = usePathname();
   const session = useSession();
   const [fixed, setFixed] = useState<boolean>(false);
+  const [isLogoutButtonVisible, setIsLogoutButtonVisible] =
+    useState<boolean>(false);
+  const status = session.status;
 
   useEffect(() => {
     const handleScroll: () => void = () => {
@@ -53,7 +56,7 @@ const Navbar = () => {
                   key={navItem.id}
                   className={`hover:text-primary transition-all duration-150  text-sm font-medium ${
                     path === navItem.path ? "text-primary" : ""
-                  }`}
+                  } ${(status === 'unauthenticated') && (navItem.label === 'Dashboard') ? 'hidden' : '' }`}
                 >
                   <Link href={navItem.path}>
                     <p>{navItem.label}</p>
@@ -62,10 +65,22 @@ const Navbar = () => {
               ))}
             </ul>
             {session?.data?.user ? (
-              <Avatar>
-                <AvatarImage src="https://github.com/shadcn.png" />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
+              <div
+                onClick={() => setIsLogoutButtonVisible(!isLogoutButtonVisible)}
+                className="relative flex"
+              >
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div
+                  className={`${
+                    isLogoutButtonVisible ? "" : "hidden"
+                  } absolute top-10 bg-white shadow-sm px-5 py-2 rounded-md left-1/2 transform -translate-x-1/2`}
+                >
+                  <Button onClick={() => signOut()}>Logout</Button>
+                </div>
+              </div>
             ) : (
               <div>
                 <Link href={"register"}>

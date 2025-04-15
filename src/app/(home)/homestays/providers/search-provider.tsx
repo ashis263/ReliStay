@@ -51,7 +51,7 @@ const SearchProvider = ({ children }: { children: ReactNode }) => {
   const [queryString, setQueryString] = useState<string>("");
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/homestays`)
+    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/homestays/${queryString}`)
       .then((res) => res.json())
       .then((data) => {
         setHomestays(data); 
