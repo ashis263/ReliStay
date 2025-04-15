@@ -39,7 +39,7 @@ const navigation: NavItem[] = [
   {
     id: 3,
     path: "/contact",
-    label: "Contact",
+    label: "Contact Us",
   },
   {
     id: 4,

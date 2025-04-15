@@ -17,6 +17,14 @@ import {
 } from "@/components/ui/alert-dialog";
 import { headers } from "next/headers";
 
+interface UserRow {
+  _id: string;
+  name: string;
+  email: string;
+  address?: string;
+  role: string;
+}
+
 const Users = async () => {
   const getUsers = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/users`,
@@ -41,7 +49,7 @@ const Users = async () => {
         </TableRow>
       </TableHead>
       <TableBody>
-        {users.data?.map((row) => (
+        {users.data?.map((row: UserRow) => (
           <TableRow key={row._id} className="border-b-2">
             <Td> {row.name} </Td>
             <Td> {row.email} </Td>

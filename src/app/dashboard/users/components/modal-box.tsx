@@ -5,10 +5,8 @@ import {
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useRouter } from "next/navigation";
@@ -41,7 +39,7 @@ const ModalBox = ({
         router.refresh();
         toast("User deleted successfully.");
       }
-    } catch (error) {}
+    } catch (error) {console.log(error);}
   };
   return (
     <AlertDialog>

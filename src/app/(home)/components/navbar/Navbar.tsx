@@ -18,6 +18,7 @@ const Navbar = () => {
   const [fixed, setFixed] = useState<boolean>(false);
   const [isLogoutButtonVisible, setIsLogoutButtonVisible] =
     useState<boolean>(false);
+  const status = session.status;
 
   useEffect(() => {
     const handleScroll: () => void = () => {
@@ -55,7 +56,7 @@ const Navbar = () => {
                   key={navItem.id}
                   className={`hover:text-primary transition-all duration-150  text-sm font-medium ${
                     path === navItem.path ? "text-primary" : ""
-                  }`}
+                  } ${(status === 'unauthenticated') && (navItem.label === 'Dashboard') ? 'hidden' : '' }`}
                 >
                   <Link href={navItem.path}>
                     <p>{navItem.label}</p>
