@@ -19,10 +19,10 @@ const Filters = () => {
             <div className="space-y-2">
                 <h4 className="text-lg font-medium">Price</h4>
                 <div className="space-y-[6px]">
-                    <CheckboxDemo filterBy={{ price: '৳ 0 - ৳ 1000' }} />
-                    <CheckboxDemo filterBy={{ price: '৳ 1001 - ৳ 2000' }} />
-                    <CheckboxDemo filterBy={{ price: '৳ 2001 - ৳ 3000' }} />
-                    <CheckboxDemo filterBy={{ price: '৳ 3001 - more' }} />
+                    <CheckboxDemo filterBy={{ price: '0 - 1000' }} />
+                    <CheckboxDemo filterBy={{ price: '1001 - 2000' }} />
+                    <CheckboxDemo filterBy={{ price: '2001 - 3000' }} />
+                    <CheckboxDemo filterBy={{ price: '3001 - more' }} />
                 </div>
             </div>
             <div className="space-y-2">

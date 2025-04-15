@@ -1,8 +1,5 @@
 "use client";
 
-import { MailIcon, PlusCircleIcon } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import {
   SidebarGroup,
   SidebarGroupContent,
